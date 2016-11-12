@@ -30,10 +30,11 @@ def get_event_subscriptions(event_id):
         'Content-type': 'application/json',
         'Authorization': TOKEN
     }
+    payload = {'event_ids': str([event_id])}
+    http_url = 'https://demo.calendar42.com/api/v2/event-subscriptions/'
 
-    http_url = 'https://demo.calendar42.com/api/v2/event-subscriptions/?event_ids=[%s]' % event_id
     try:
-        resp = requests.get(http_url, headers=headers)
+        resp = requests.get(http_url, headers=headers, params=payload)
     except:
         print('GET Request to "Get the event details" FAILED ')
         raise
