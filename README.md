@@ -7,7 +7,7 @@ TOKEN = '0fde9f26fe8bf272cbc1336218999b620abe98b8'
 EVENT_ID = '1d2e3220f23ec79c8b547302d1deabe9_14770730218531'
 
 
-## Initail Requirements.
+## Initail Requirements:
 _A. Get the event details (including title)_
 
 ```
@@ -30,7 +30,7 @@ curl --request GET \
 
 _C. Combine and cache results_
 
-_D. Expected final Response on /events-with-subscriptions/$EVENT_ID/
+_D. Expected final Response on /events-with-subscriptions/$EVENT_ID/_
 ```
 # The combination of the two calls should result in the following JSON data structure
 {
@@ -38,4 +38,22 @@ _D. Expected final Response on /events-with-subscriptions/$EVENT_ID/
 "title": "Test Event",
 "names": ["Bob", "Ella"]
 }
+```
+
+# View it in action:
+
+1. Clone the repository.
+
+2. Install requirements.
+
+```
+pip install -r requirements.txt
+```
+3. Run the development server:
+```
+python app.py
+```
+4. Open the webbrowser
+```
+http://127.0.0.1:5000/events-with-subscriptions/1d2e3220f23ec79c8b547302d1deabe9_14770730218531/
 ```
