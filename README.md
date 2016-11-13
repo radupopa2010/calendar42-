@@ -4,6 +4,7 @@ To solve this assignment I use Flask.
 I've chosen this framework because it's lightweight and because I never had the opportunity to use Django. 
 
 TOKEN = '0fde9f26fe8bf272cbc1336218999b620abe98b8'
+
 EVENT_ID = '1d2e3220f23ec79c8b547302d1deabe9_14770730218531'
 
 
