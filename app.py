@@ -1,29 +1,33 @@
-# ---- Calendar 24 assignment ---- #
-
+"""Solution for Calendar 24 assignment."""
 
 import requests
-from pprint import pformat
 
-# import the Flask class from the flask package
-from flask import Flask
+from flask import Flask, jsonify
+from flask_caching import Cache
 
 
 # Config.
 TOKEN = 'Token 0fde9f26fe8bf272cbc1336218999b620abe98b8'
-EVENT_ID = '1d2e3220f23ec79c8b547302d1deabe9_14770730218531'
-
 
 # Create the application object.
 app = Flask(__name__)
 
+# Cache setup
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+
+# error handling
+app.config["DEBUG"] = True
+
 
 @app.route("/")
 def hello_world():
-    return "Hello, World! "
+    return "Hello, World!"
 
 
 def get_event_subscriptions(event_id):
-    """Helper func for "events_with_subscriptions" ."""
+    """Helper func for "events_with_subscriptions".
+    Returns list of dicts.
+    """
 
     headers = {
         'Accept': 'application/json',
@@ -40,7 +44,6 @@ def get_event_subscriptions(event_id):
         raise
     else:
         print(resp.status_code)
-        # import pdb; pdb.set_trace()
         if resp.status_code == 200:
             event_det = resp.json().get('data')
             return event_det
@@ -49,7 +52,9 @@ def get_event_subscriptions(event_id):
 
 
 def get_event_details(event_id):
-    """Helper func for "events_with_subscriptions". """
+    """Helper func for "events_with_subscriptions".
+    Returns event details dict.
+    """
 
     headers = {
         'Accept': 'application/json',
@@ -78,18 +83,18 @@ def get_event_details(event_id):
 
 # dynamic route
 @app.route('/events-with-subscriptions/<event_id>/')
+# cache for 4.2 minutes
+@cache.cached(timeout=4.2 * 60)
 def events_with_subscriptions(event_id):
-    """Func docs here."""
+    """Return events with subscriptions as JSON."""
 
     try:
         event_details = get_event_details(event_id)
     except ValueError:
         print('Error while getting EVENT DETAILS: ', event_id)
-        # TODO: see what to retrn if no data is found.
-        return
+        return "Event Details Not Found", 404
     else:
-        # Do stuff with data
-        print(pformat(event_details))
+        # Do stuff with data.
         _id = event_details.get('id')
         title = event_details.get('title')
 
@@ -97,12 +102,22 @@ def events_with_subscriptions(event_id):
         event_subs = get_event_subscriptions(event_id)
     except ValueError:
         print('Error while getting EVENT SUBSCRIPTIONS for event ', event_id)
+        return "Event Subscriptions Not Found", 404
     else:
-        names = event_subs
+        # Get list of names from all subscriptions objects.
+        names_u = [
+            ea_obj.get('subscriber').get('first_name') for ea_obj in event_subs
+        ]
 
-    return 'id = %s , title = %s \n\n %s' % (_id, title, names)
+    names = [str(x) for x in names_u]
+    res = dict(
+        id=_id,
+        title=title,
+        names=names
+    )
+    return jsonify(res)
 
 
-# start the development server using the run() method
+# start the development server
 if __name__ == "__main__":
     app.run()
