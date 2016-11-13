@@ -31,7 +31,7 @@ curl --request GET \
 
 _C. Combine and cache results_
 
-_D. Expected final Response on /events-with-subscriptions/$EVENT_ID/ _
+_D. Expected final Response on /events-with-subscriptions/$EVENT_ID/_
 ```
 # The combination of the two calls should result in the following JSON data structure
 {
