@@ -48,11 +48,11 @@ _D. Expected final Response on /events-with-subscriptions/$EVENT_ID/_
 ```
 pip install -r requirements.txt
 ```
-3. Run the development server:
+3. Run the development server.
 ```
 python app.py
 ```
-4. Open the webbrowser
+4. Open the webbrowser.
 ```
 http://127.0.0.1:5000/events-with-subscriptions/1d2e3220f23ec79c8b547302d1deabe9_14770730218531/
 ```
