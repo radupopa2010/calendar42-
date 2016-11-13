@@ -4,6 +4,7 @@ To solve this assignment I use Flask.
 I've chosen this framework because it's lightweight and because I never had the opportunity to use Django. 
 
 TOKEN = '0fde9f26fe8bf272cbc1336218999b620abe98b8'
+
 EVENT_ID = '1d2e3220f23ec79c8b547302d1deabe9_14770730218531'
 
 
@@ -42,17 +43,18 @@ _D. Expected final Response on /events-with-subscriptions/$EVENT_ID/_
 
 # View it in action:
 
-1. Clone the repository.
+1. Clone the repository
 
-2. Install requirements.
-```
-pip install -r requirements.txt
-```
+2. Install requirements
+
+  `pip install -r requirements.txt`
+
 3. Run the development server.
-```
-python app.py
-```
+
+  `python app.py`
+
 4. Open the webbrowser.
+
 ```
 http://127.0.0.1:5000/events-with-subscriptions/1d2e3220f23ec79c8b547302d1deabe9_14770730218531/
 ```
