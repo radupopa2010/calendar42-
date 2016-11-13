@@ -45,12 +45,15 @@ _D. Expected final Response on /events-with-subscriptions/$EVENT_ID/_
 1. Clone the repository.
 
 2. Install requirements.
-
-```pip install -r requirements.txt```
+```
+pip install -r requirements.txt
+```
 
 3. Run the development server.
 
-```python app.py```
+```
+python app.py
+```
 
 4. Open the webbrowser.
 ```
