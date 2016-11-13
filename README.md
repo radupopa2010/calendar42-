@@ -45,7 +45,6 @@ _D. Expected final Response on /events-with-subscriptions/$EVENT_ID/_
 1. Clone the repository.
 
 2. Install requirements.
-
 ```
 pip install -r requirements.txt
 ```
